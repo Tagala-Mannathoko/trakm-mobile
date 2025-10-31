@@ -1,50 +1,199 @@
-# Welcome to your Expo app 👋
+# TRAKM - Neighbourhood Watch Management System
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A comprehensive mobile app for security officers and neighbourhood watch coordinators to manage patrol monitoring, emergency alerts, community interaction, and reporting.
 
-## Get started
+## Features
 
-1. Install dependencies
+### 🔐 Authentication System
+- Secure login/signup with email and password
+- User role management (Security Officer, Resident, Admin)
+- Form validation and error handling
 
+### 📊 Dashboard
+- Personalized welcome with user greeting
+- Search functionality for alerts, officers, and locations
+- Dashboard grid with key metrics:
+  - Live Patrol Maps
+  - Patrol Trends
+  - Active Alerts
+  - QR Scanner
+- Real-time statistics and active zones monitoring
+
+### 🚶 Patrol Monitoring
+- QR code scanning for checkpoint verification
+- Patrol logging with comments
+- Scan history tracking
+- Route management (Zone A, B, C)
+- Real-time location tracking
+
+### 🚨 Emergency Alerts
+- Active alerts management with priority levels
+- Color-coded priority system (High/Medium/Low)
+- Alert resolution workflow
+- Statistics and filtering options
+- Quick actions for reporting and mapping
+
+### 👥 Community Interaction
+- Community updates and posts
+- Upcoming events management
+- Resident concerns tracking
+- Quick messaging system
+- Community statistics
+
+### 📈 Reporting & Analytics
+- Comprehensive analytics dashboard
+- Data filtering by type and date range
+- Report generation (Weekly, Monthly, Custom)
+- Export options (PDF, Excel)
+- Performance metrics and trends
+
+## Technical Stack
+
+- **Framework**: React Native with Expo (~54.0)
+- **Database**: Supabase (PostgreSQL)
+- **Authentication**: Supabase Auth
+- **Navigation**: Expo Router (file-based routing)
+- **UI**: Custom components with React Native
+- **Icons**: Expo Vector Icons
+- **Camera**: Expo Camera for QR scanning
+- **Maps**: React Native Maps
+- **Platform Support**: iOS, Android, Web
+
+## Database Schema
+
+The app uses a comprehensive PostgreSQL schema with the following main entities:
+
+- **Users**: Base user table with authentication
+- **Security Officers**: Patrol personnel management
+- **Neighborhood Members**: Resident management
+- **Emergency Alerts**: Incident tracking
+- **Patrol Scans**: QR code scan records
+- **Community Posts**: Community interaction
+- **QR Codes**: Checkpoint management
+- **Reports**: Analytics and reporting
+
+### Member features schema additions
+
+Run the SQL in `supabase/schema.sql` to add:
+
+- `community_comments` table for post comments
+- Indexes for faster queries
+- Optional `qr_codes.member_id` to link a QR to a member house
+
+## Setup Instructions
+
+### Prerequisites
+- Node.js (v18 or higher)
+- Expo CLI
+- Supabase account
+
+### Installation
+
+1. **Clone the repository**
+   ```bash
+   git clone <repository-url>
+   cd trakm-mobile
+   ```
+
+2. **Install dependencies**
    ```bash
    npm install
    ```
 
-2. Start the app
+3. **Set up Supabase**
+   - Create a new Supabase project
+   - Run the provided SQL schema in your Supabase SQL editor
+   - Get your project URL and anon key
 
-   ```bash
-   npx expo start
+4. **Configure environment variables**
+   Create a `.env` file in the root directory:
+   ```env
+   EXPO_PUBLIC_SUPABASE_URL=your-supabase-project-url
+   EXPO_PUBLIC_SUPABASE_ANON_KEY=your-supabase-anon-key
    ```
 
-In the output, you'll find options to open the app in a
+5. **Start the development server**
+   ```bash
+   npm start
+   ```
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+6. **Run on your preferred platform**
+   ```bash
+   # iOS
+   npm run ios
+   
+   # Android
+   npm run android
+   
+   # Web
+   npm run web
+   ```
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+## Project Structure
 
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
+```
+trakm-mobile/
+├── app/                    # Expo Router pages
+│   ├── (tabs)/            # Main app tabs
+│   │   ├── index.tsx     # Dashboard
+│   │   ├── patrol.tsx    # Patrol monitoring
+│   │   ├── alerts.tsx    # Emergency alerts
+│   │   ├── community.tsx # Community features
+│   │   └── reports.tsx   # Analytics & reports
+│   ├── auth/             # Authentication screens
+│   │   ├── login.tsx     # Login screen
+│   │   └── signup.tsx    # Signup screen
+│   └── _layout.tsx       # Root layout
+├── components/           # Reusable components
+├── contexts/            # React contexts
+│   └── AuthContext.tsx  # Authentication context
+├── lib/                 # Utilities and configurations
+│   └── supabase.ts      # Supabase client setup
+└── constants/           # App constants
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+## Key Features Implementation
 
-## Learn more
+### Authentication Flow
+- Secure user authentication with Supabase
+- Role-based access control
+- Automatic session management
+- Route protection
 
-To learn more about developing your project with Expo, look at the following resources:
+### QR Code Scanning
+- Camera integration for QR code scanning
+- Real-time checkpoint verification
+- Offline scan storage with sync
+- Location tracking integration
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+### Real-time Updates
+- Live dashboard updates
+- Push notifications for alerts
+- Real-time patrol tracking
+- Community updates feed
 
-## Join the community
+### Dark Theme Design
+- Consistent dark theme throughout the app
+- Color-coded priority system
+- Intuitive navigation
+- Modern UI/UX design
 
-Join our community of developers creating universal apps.
+## Database Setup
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+Run the provided SQL schema in your Supabase SQL editor to set up all necessary tables, relationships, and indexes.
+
+## Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Test thoroughly
+5. Submit a pull request
+
+## License
+
+This project is licensed under the MIT License.
+
+## Support
+
+For support and questions, please contact the development team or create an issue in the repository.
